@@ -23,8 +23,28 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                           </form>                      
                         @endif
-                    @endif                  
+                    @endif  
+                    &nbsp;                
+                    @if(!$post->likedBy(auth()->user()))                                          
+                    <form action="{{route('posts.likes', $post)}}" method="POST">
+                      <button type="submit" class="btn btn-success"><i class="fa fa-thumbs-up"></i></button>                        
+                      @csrf
+                    </form>
+                    @else
+                    &nbsp;                      
+                    <form action="{{route('posts.likes', $post)}}" method="POST">
+                      @csrf
+                      @method('DELETE')          
+                      <button type="submit" class="btn btn-danger"><i class="fa fa-thumbs-down"></i></button>
+                    </form> 
+                    @endif           
+                     
+                     
+                     <span>{{$post->likes->count()}} {{ Str::plural('like', 
+                      $post->likes->count())}}</span>                  
                     
+                                    
+                    <hr>
                                         
                         <hr>
 

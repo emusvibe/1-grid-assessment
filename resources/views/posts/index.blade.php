@@ -35,9 +35,30 @@
                       <h2><a href="/posts/{{$post->id}}">{{ $post->title}}</a></h2>
                       <h3>{{$post->body}}</h3>
                       <small>Written {{$post->created_at->diffForHumans()}} by {{$post->user->name}}</small>
-
                       <hr>
-                  @endforeach                  
+                      
+                      @if(!$post->likedBy(auth()->user()))                                          
+                      <form action="{{route('posts.likes', $post)}}" method="POST">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-thumbs-up"></i></button>                        
+                        @csrf
+                      </form>
+                      @else
+                      &nbsp;                      
+                      <form action="{{route('posts.likes', $post)}}" method="POST">
+                        @csrf
+                        @method('DELETE')          
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-thumbs-down"></i></button>
+                      </form> 
+                      @endif           
+                       
+                       
+                       <span>{{$post->likes->count()}} {{ Str::plural('like', 
+                        $post->likes->count())}}</span>                  
+                      
+                                      
+                      <hr>
+                  @endforeach
+                  {{$posts->links()}}
                 @else
                     <p>No Posts Found</p>
                 @endif
