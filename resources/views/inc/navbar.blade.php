@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                1-grid-App
+                1-grid
             </a>
         </div>
 
@@ -21,33 +21,33 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">                
                 <!-- Authentication Links -->
-               
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                
+                @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
                         <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{url('/posts') }}">Posts</a></li>
+                        <li><a href="{{ url('/posts') }}">Posts</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     </ul>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            John Doe<span class="caret"></span>
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <form action="#" method="POST">
-                                    <a href="#" style="text-decoration:none;  color : #000000;">Logout</a>                                    
+                                <form action="{{route('logout') }}" method="POST">
+                                    <a href="{{ route('logout') }}" style="text-decoration:none;  color : #000000;">Logout</a>                                    
                                 </form>                                   
                             </li>
                                 
                         </ul>
                     </li>
-               
+                @endif
             </ul>
 
 

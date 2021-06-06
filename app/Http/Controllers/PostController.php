@@ -12,6 +12,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
@@ -41,7 +47,7 @@ class PostController extends Controller
             'body' => 'required'
         ]);
 
-        $post = Post::create($validateData);       
+         $request->user()->posts()->create($validateData);          
        
         return redirect()->route('posts.index')->with('success', 'Post Created Successfully');
     }
