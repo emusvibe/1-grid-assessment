@@ -27,7 +27,7 @@
                 
                         <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Posts</a></li>
+                        <li><a href="{{url('/posts') }}">Posts</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
                         <li><a href="#">Dashboard</a></li>
