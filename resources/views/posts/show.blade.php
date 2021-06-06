@@ -14,18 +14,16 @@
                                              
                       <hr>         
                       @if(!Auth::guest())
-                        @if(Auth::user()->id == $post->user_id)
-                            <form action="{{ route('posts.edit',$post->id) }}" method="POST">                             
-                                <a class="btn btn-success" href="{{ route('posts.edit',$post->id) }}">Edit</a>
-                                &nbsp;
-                                
-                                @csrf
-                                @method('DELETE')          
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                              </form>  
+                      @if(Auth::user()->id == $post->user_id)                      
+                          <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                            <a class="btn btn-success" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                            &nbsp;
+                            @csrf
+                            @method('DELETE')          
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>                      
                         @endif
-                             @endif 
-                           
+                    @endif                  
                     
                                         
                         <hr>
