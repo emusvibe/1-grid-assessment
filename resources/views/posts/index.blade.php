@@ -36,7 +36,7 @@
                       <h3>{{$post->body}}</h3>
                       <small>Written {{$post->created_at->diffForHumans()}} by {{$post->user->name}}</small>
                       <hr>
-                      
+                      @auth
                       @if(!$post->likedBy(auth()->user()))                                          
                       <form action="{{route('posts.likes', $post)}}" method="POST">
                         <button type="submit" class="btn btn-success"><i class="fa fa-thumbs-up"></i></button>                        
@@ -49,12 +49,11 @@
                         @method('DELETE')          
                         <button type="submit" class="btn btn-danger"><i class="fa fa-thumbs-down"></i></button>
                       </form> 
-                      @endif           
-                       
+                      @endif
+                      @endauth                   
                        
                        <span>{{$post->likes->count()}} {{ Str::plural('like', 
-                        $post->likes->count())}}</span>                  
-                      
+                        $post->likes->count())}}</span>                      
                                       
                       <hr>
                   @endforeach
