@@ -10,18 +10,21 @@
               <div class="panel-heading">{{ $post->title}}</div>
               <div class="panel-body">                        
                       <h3>{{$post->body}}</h3>
-                      <small>Written {{$post->created_at->diffForHumans()}} </small>
-                      
-                      <input type="hidden" name="id" required="" value="{{ $post->id }}">                       
+                      <small>Written {{$post->created_at->diffForHumans()}} by {{$post->user->name}} </small>      
+                                             
                       <hr>         
-                                           
-                              <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                      @if(!Auth::guest())
+                        @if(Auth::user()->id == $post->user_id)
+                            <form action="{{ route('posts.edit',$post->id) }}" method="POST">                             
                                 <a class="btn btn-success" href="{{ route('posts.edit',$post->id) }}">Edit</a>
                                 &nbsp;
+                                
                                 @csrf
                                 @method('DELETE')          
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                              </form>   
+                              </form>  
+                        @endif
+                             @endif 
                            
                     
                                         

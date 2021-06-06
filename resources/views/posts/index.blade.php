@@ -34,8 +34,8 @@
                   @foreach($posts as $post)
                       <h2><a href="/posts/{{$post->id}}">{{ $post->title}}</a></h2>
                       <h3>{{$post->body}}</h3>
-                      <small>Written {{$post->created_at->diffForHumans()}}</small>
-                                                      
+                      <small>Written {{$post->created_at->diffForHumans()}} by {{$post->user->name}}</small>
+
                       <hr>
                   @endforeach                  
                 @else
